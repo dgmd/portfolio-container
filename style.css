@@ -1,0 +1,72 @@
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+#main {
+	position: fixed;
+	height: 200%;
+	width: 100%;
+	overflow: auto;
+
+	background-color: black;
+}
+
+.hero-overlay {
+	height: 50%;
+	background-color: blue;
+}
+
+nav#timeline {
+	height: 50%;
+	background: red;
+}
+
+nav#timeline ol {
+	display: inline-block;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	height: 100%;
+	width: 100%;
+}
+
+nav#timeline li {
+	position: absolute;
+	height: 100%;
+	width: 1366px;
+	background: url("./landing-april.jpg");
+}
+
+li#zero {
+	left: 0em;
+}
+
+li#one {
+	left: 25em;
+}
+
+li#two {
+	left: 50em;
+}
+
+nav#timeline li#zero:hover {
+	-webkit-transform: translateX(0px);
+}
+
+div.overlay {
+	height: 100%;
+}
+
+#timeline li, #timeline li:hover, .overlay, .overlay:hover {
+	-webkit-transition: 300ms ease;
+}
+
+#timeline li:hover{
+	-webkit-transform: translateX(-25px);
+}
+
+.overlay {
+	-webkit-transform: translateX(-25px);
+}
