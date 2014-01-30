@@ -7,21 +7,25 @@ html, body {
 	position: fixed;
 	height: 200%;
 	width: 100%;
-	overflow: auto;
 
-	background-color: black;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 .hero-overlay {
 	height: 50%;
-	background-color: blue;
+	background: url("./hero.jpg")
 }
 
 nav#timeline {
-	height: 50%;
-	background: red;
+	position: relative;
+	left: 0%; /* Set left explicitly to access via .style.left in JS */
+	bottom: 0%;
+	height: 100%;
+	width: 100%;
 }
 
+/* Treating the panels as an unstyled, ordered list */
 nav#timeline ol {
 	display: inline-block;
 	list-style: none;
@@ -33,40 +37,86 @@ nav#timeline ol {
 }
 
 nav#timeline li {
-	position: absolute;
+	position: absolute; /* Absolute positioning to enable JS animation via style.left */
 	height: 100%;
-	width: 1366px;
-	background: url("./landing-april.jpg");
+	width: 1920px; /* Width of individual backgrounds */
 }
 
-li#zero {
-	left: 0em;
-}
-
-li#one {
-	left: 25em;
-}
-
-li#two {
-	left: 50em;
-}
-
-nav#timeline li#zero:hover {
-	-webkit-transform: translateX(0px);
-}
-
-div.overlay {
-	height: 100%;
-}
-
-#timeline li, #timeline li:hover, .overlay, .overlay:hover {
+nav#timeline li, .description {
 	-webkit-transition: 300ms ease;
 }
 
-#timeline li:hover{
+/* Applied to the active panel */
+nav#timeline li:hover {
+	-webkit-filter: saturate(0);
+}
+
+nav#timeline li:hover .description {
+	color: #CCC;
+	-webkit-transform: translateX(25px);	
+}
+
+/* Applied to the active panel and all to the left */
+.slideLeft{
 	-webkit-transform: translateX(-25px);
 }
 
-.overlay {
-	-webkit-transform: translateX(-25px);
+/* Applied to the active panel and all to the right */
+.slideRight {
+	-webkit-transform: translateX(25px);
+}
+
+.description {
+	position: relative;
+	text-align: center;
+	width: 25em;
+	padding-top: 15%;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.description h2 {
+	text-transform: uppercase;
+
+	font-weight: 700;
+}
+
+.description span {
+	font-weight: 400;
+}
+
+/* Initial positioning of slides: Note that we could use 
+hue-rotate instead of images, but that is not performant. */
+li#zero {
+	left: calc(25em * 0);
+	background: url("./zero.jpg");
+}
+
+li#one {
+	left: calc(25em * 1);
+	background: url("./one.jpg");
+}
+
+li#two {
+	left: calc(25em * 2);
+	background: url("./two.jpg");
+}
+
+li#three {
+	left: calc(25em * 3);
+	background: url("./three.jpg");
+}
+
+li#four {
+	left: calc(25em * 4);
+	background: url("./four.jpg");
+}
+
+li#five {
+	left: calc(25em * 5);
+	background: url("./five.jpg");
+}
+
+li#six {
+	left: calc(25em * 6);
+	background: url("./six.jpg");
 }
