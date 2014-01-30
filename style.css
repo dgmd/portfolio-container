@@ -53,7 +53,7 @@ nav#timeline li:hover {
 
 nav#timeline li:hover .description {
 	color: #CCC;
-	-webkit-transform: translateX(25px);	
+	-webkit-transform: translateX(25px);
 }
 
 /* Applied to the active panel and all to the left */

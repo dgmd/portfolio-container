@@ -9,11 +9,14 @@ function getStyleProp(elem, prop){
 var mouseX = null;
 var mouseY = null;
 var scrollTimeline = null;
+var updateInterval = 10;
+var scrolling = false;
+
 window.onmousemove = function(event) {
 	mouseX = event.clientX;
 	mouseY = event.clientY;
 	if (!scrollTimeline) {
-		scrollTimeline = window.setInterval(scroll, 20);
+		scrollTimeline = window.setInterval(scroll, updateInterval);
 	}
 };
 
@@ -30,17 +33,20 @@ timeline.onmouseout = unslide; // Undo slides when out of timeline
 
 
 function scroll(event) {
-	var buffer = 200;
+	var buffer = window.innerWidth/4;
 
 	var distanceToCenter = Math.abs(window.innerWidth/2-mouseX);
 	var speed = distanceToCenter/(window.innerWidth/2);
 	if (mouseX < buffer) {
+		scrolling = true;
 		scrollLeft(speed);
 	}
 	else if ((window.innerWidth - mouseX) < buffer) {
+		scrolling = true;
 		scrollRight(speed);
 	}
 	else {
+		scrolling = false;
 		window.clearInterval(scrollTimeline);
 		scrollTimeline = null;
 	}
@@ -52,8 +58,9 @@ function scrollLeft(speed) {
 
 function scrollRight(speed) {
 	var leftPixels = parseInt(getStyleProp(timeline, 'left'), 10);
-	var toShift = Math.pow(speed,3)*10;
+	var toShift = Math.pow(speed,3)*updateInterval;
 	var newLeft = leftPixels - toShift;
+
 	if (newLeft >= -1400 && newLeft  <= 0) {
 		timeline.style.left = newLeft + 'px';
 	}
@@ -61,8 +68,6 @@ function scrollRight(speed) {
 
 function slide(event)
 {
-	this.classList.add("hover");
-	var description = document.querySelector(".hover .description");
 	for (i = 0; i < projects.length; i++) {
 		if (i <= projects.indexOf(this)) {
 			projects[i].classList.add("slideLeft");
